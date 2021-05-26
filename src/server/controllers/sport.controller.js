@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-21 00:07:26
- * @LastEditTime: 2021-05-26 01:27:38
+ * @LastEditTime: 2021-05-26 01:43:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \mp-server-v1\src\server\controllers\learning.controller.js
@@ -10,7 +10,7 @@
 import modelCtrl from '../modules/helper/modelCtrl.js'
 import resModel from '../modules/res.module';
 
-const learingGet = (req, res) => {
+const sportGet = (req, res) => {
     let page = req.query.pape
     let loca = req.query.loca
     let personnum = req.query.personnum
@@ -20,7 +20,7 @@ const learingGet = (req, res) => {
         filter.personnum = personnum
     }
     // if(loca){filter.loca = loca}
-    modelCtrl.find(resModel.resLearningModel,page,filter)
+    modelCtrl.find(resModel.resSportModel,page,filter)
     .then((result) => {
         res.status(200)
         .json(result.data)
@@ -30,9 +30,9 @@ const learingGet = (req, res) => {
     })
 }
 
-const learingPost = (req, res) => {
+const sportPost = (req, res) => {
     const data = req.body;
-    modelCtrl.create(resModel.resLearningModel,data)
+    modelCtrl.create(resModel.resSportModel,data)
     .then((result) => {
         res.status(200)
         .json(result.id)
@@ -42,10 +42,10 @@ const learingPost = (req, res) => {
     })
 }
 
-const learingPut = (req, res) => {
+const sportPut = (req, res) => {
     let id = req.params.id
     let data = req.body;
-    modelCtrl.updateById(resModel.resLearningModel,id,data)
+    modelCtrl.updateById(resModel.resSportModel,id,data)
     .then((result) => {
         res.status(200)
         .json(result.updated)
@@ -55,9 +55,9 @@ const learingPut = (req, res) => {
     })
 }
 
-const learingDelete = (req, res) => {
+const sportDelete = (req, res) => {
     let id = req.params.id
-    modelCtrl.deleteById(resModel.resLearningModel,id)
+    modelCtrl.deleteById(resModel.resSportModel,id)
     .then((result) => {
         res.status(200)
         .json(result.deleted)
@@ -70,8 +70,8 @@ const learingDelete = (req, res) => {
 
 
 export default{
-    learingGet,
-    learingPost,
-    learingPut,
-    learingDelete
+    sportGet,
+    sportPost,
+    sportPut,
+    sportDelete
 }

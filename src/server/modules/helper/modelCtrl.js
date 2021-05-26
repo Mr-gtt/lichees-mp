@@ -1,25 +1,25 @@
 /*
  * @Author: your name
  * @Date: 2021-05-20 23:29:59
- * @LastEditTime: 2021-05-21 01:17:56
+ * @LastEditTime: 2021-05-26 01:26:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \mp-server-v1\src\server\modules\helper\learning.js
  */
-import {resLearningModel} from '../res.module.js'
 
 /***
  * function:findLearing
+ * @param {Object} Model
  * @param {Number} page 数据Learning的页数
  * @param {Object} filter 过滤器
  * 
  * @return {Promise} 返回数据result
  */
 
-const findLearing = (page=1,filter={}) =>{
+const find = (Model,page=1,filter={}) =>{
     let listSize = 15;
     return new Promise((resolve, reject) => {
-        resLearningModel
+        Model
         .where(filter)
         .skip((page-1)*listSize)
         .limit(listSize)
@@ -37,14 +37,15 @@ const findLearing = (page=1,filter={}) =>{
 
 /***
  * function:findLearing
+ * @param {Object} Model
  * @param {Object} newData 新增的数据
  * 
  * @return {Promise} 返回数据result
  */
 
-const createLearing = (newData) =>{
+const create = (Model,newData) =>{
     return new Promise((resolve, reject) => {
-        resLearningModel
+        Model
         .add(newData)
         .then((result) =>{
             resolve(result);
@@ -59,15 +60,16 @@ const createLearing = (newData) =>{
 
 /***
  * function:findLearing
+ * @param {Object} Model
  * @param {String} _id 更新文档的id
  * @param {Object} updateData 更新的数据
  * 
  * @return {Promise} 返回数据result
  */
 
-const updateLearingById = (_id,updateData) =>{
+const updateById = (Model,_id,updateData) =>{
     return new Promise((resolve, reject) => {
-        resLearningModel
+        Model
         .where({_id : _id})
         .update(updateData)
         .then((result) =>{
@@ -82,14 +84,15 @@ const updateLearingById = (_id,updateData) =>{
 
 /***
  * function:findLearing
+ * @param {Object} Model
  * @param {String} _id 删除的文档的id
  * 
  * @return {Promise} 返回数据result
  */
 
-const deleteLearingById = (_id) =>{
+const deleteById = (Model,_id) =>{
     return new Promise((resolve, reject) => {
-        resLearningModel
+        Model
         .doc(_id)
         .remove()
         .then((result) =>{
@@ -104,9 +107,9 @@ const deleteLearingById = (_id) =>{
 }
 
 export default {
-    findLearing,
-    createLearing,
-    updateLearingById,
-    deleteLearingById
+    find,
+    create,
+    updateById,
+    deleteById
 
 }
